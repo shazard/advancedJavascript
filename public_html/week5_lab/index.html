@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<link type="text/css" rel="stylesheet" href="stylesheet.css"/>
+		<script src="jquery-2.1.3.js"></script>
+		<script src="main_scripts.js"></script>
+		
+		<title>Project Manager</title>
+	</head>
+	<body>
+	
+		<h1>Edit Projects</h1>
+	
+		<div id="project_listing">
+			<!--  Project array content will generate here -->
+		</div>
+	
+		<div id="project_detail">
+			<div id="edit_form">
+				<form name="editInfo">
+				
+					<p id="editNameLabel">
+					Project Name <br />
+					<input type="text" id="editProjectName"/>
+					</p>
+					
+					<p id="editWebsiteLabel">
+					Website <br />
+					<input type="text" id="editWebsite"/>
+					</p>
+					
+					 <p id="editDescriptionLabel">
+					Email <br />
+					<input type="text" id="editDescription"/>
+					</p>
+					
+					<input type="button" value="submit" onclick="" />
+					
+				</form>
+			</div>
+		</div>
+	
+		<div id="project_add">
+			<div id="add_form">
+	
+				<form name="addInfo">
+				
+					<p id="nameLabel">
+					Project Name <br />
+					<input type="text" id="projectName"/>
+					</p>
+					
+					<p id="websiteLabel">
+					Website <br />
+					<input type="text" id="website"/>
+					</p>
+					
+					 <p id="descriptionLabel">
+					Email <br />
+					<input type="text" id="description"/>
+					</p>
+					
+					<input type="button" value="submit" onclick="addToProjectTable()" />
+					
+				</form>
+			</div>
+		</div>
+	
+	
+	</body>
+</html>

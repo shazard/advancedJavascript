@@ -1,0 +1,31 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+<title>Week 1 Lab</title>
+<script type= "text/javascript" src="scripts.js"></script>
+</head>
+<body>
+<h1>Random Table Box Generator Thingy</h1>
+<div id="description">
+<p>Enter a number in the box. A maaaaagic table will appear, fit to the size of your number.</p>
+<p>Each of the cells in the table will hold a random number between 1 and 100.</p> 
+<p>If the number is a multiple of 3, the cell will have a red background color</p>
+<p>If it's not a multiple of 3 but a multiple of 2, the cell will have a blue background color.</p>
+<p>Finally, the power of internet maaaaaagic will display the average for all cells.</p><br>
+</div>
+<hr>
+<div id="form">
+<input type="text" id="entryBox" pattern="\d{1,}" title = "1-100">
+<input type="button" id="createTable" value="Create">
+</div>
+<hr>
+<div id="magicTable">
+<!-- magic table will appear here -->
+</div>
+<div id="magicAverage">
+<!-- magic average will appear here -->
+</div>
+
+
+</body>
+</html>

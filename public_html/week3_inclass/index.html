@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		
+<script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.4/jquery.min.js"></script>
+
+<script type="text/javascript" src="fancybox/jquery.fancybox-1.3.4.pack.js"></script>
+
+<script type="text/javascript" src="fancybox/jquery.easing-1.4.pack.js"></script>
+
+<script type="text/javascript" src="fancybox/jquery.mousewheel-3.0.4.pack.js"></script>
+
+<link rel="stylesheet" href="fancybox/jquery.fancybox-1.3.4.css" type="text/css" media="screen" />	
+		
+		
+		<title>Big Fancy Box</title>
+	</head>
+	<body>
+
+		<div id="content">
+			<h1>fancybox <span>v1.3.4</span></h1>
+			
+			
+
+</a>
+	
+				<a class="group" rel="group1" href="images/img1.jpg"><img src="images/img1.jpg" alt="" /></a>
+				<a class="group" rel="group1" href="images/img2.jpg"><img src="images/img2.jpg" alt="" /></a>
+				<a class="group" rel="group1" href="images/img3.jpg"><img src="images/img3.jpg" alt="" /></a>
+		</div>
+	</body>
+
+	<script type="text/javascript">
+$(document).ready(function() {
+
+	/* This is basic - uses default settings */
+	
+	$("a#single_image").fancybox();
+	
+	/* Using custom settings */
+	
+	$("a#inline").fancybox({
+		'hideOnContentClick': true
+	});
+
+	/* Apply fancybox to multiple items */
+	
+	$("a.group").fancybox({
+		'transitionIn'	:	'elastic',
+		'transitionOut'	:	'elastic',
+		'speedIn'		:	600, 
+		'speedOut'		:	200, 
+		'overlayShow'	:	false
+	});
+	
+});
+</script>
+
+	
+	
+</html>
+

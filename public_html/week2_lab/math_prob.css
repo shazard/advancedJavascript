@@ -1,0 +1,23 @@
+body {
+    font-family: Arial, Helvetica, sans-serif;
+    background: #666666;
+}
+
+.left_operand {float: left; width: 25px; margin-left:10px}
+.right_operand {float: left; width: 25px;}
+.operator {float: left; width: 20px}
+
+.row {clear: left}
+#content {
+    width: 800px;
+	height: 800px;
+    margin: 10px auto;
+    padding: 5px 20px;
+    background: #FFFFFF;
+    border: 1px solid #000000;
+}
+
+#result {border: 2px}
+.num {width:20px}
+.blue {background-color:blue}
+.red {background-color:red}
