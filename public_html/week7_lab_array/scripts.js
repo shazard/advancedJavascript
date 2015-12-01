@@ -1,6 +1,5 @@
 
-
-
+//check that form field has content
 function checkFilled(formField)
 {	
 	if (formField.val() == "")
@@ -12,7 +11,7 @@ function checkFilled(formField)
 		return true;
 	}	
 }
-
+//check that content of two form fields match
 function checkConfirm(formField1, formField2)
 {	
 	if (formField1.val() === formField2.val())
@@ -25,6 +24,7 @@ function checkConfirm(formField1, formField2)
 	}	
 }
 
+//declare variables to store page components
 var confirmationMainDiv;
 var confirmationInfoDiv;
 
@@ -40,8 +40,8 @@ var phone;
 
 $(document).ready(function(){
 	
-	//form1 = document.forms.info;
-		
+	//when page reaches document ready stage, associate variables with page components
+			
 	confirmationMainDiv = $("#confirmation");
 	//confirmationMainDiv = document.getElementById("confirmation");
 	confirmationInfoDiv = $("#info");
@@ -59,9 +59,8 @@ $(document).ready(function(){
 	phone = $("#phone");	
 	//phone = document.getElementById("phone");
 	
-	
-	//localStorage.clear();
-	
+
+	//object class to hold addres info
 	function NewAddress(firstName, lastName, email, phone)
 	{
 		this.firstName = firstName;
@@ -70,12 +69,13 @@ $(document).ready(function(){
 		this.phone = phone;
 	}	
 	
+	//array to hold addresses
 	var programAddressData = [];
 	
-	if (localStorage.getItem("addressArray") != null)
+	//if there's anything in the array, load it onto page with a for loop - not used now at page load but would be if array were pre loaded
+	if (programAddressData.length > 0)
 	{
-                //replace below line with get function from database
-		programAddressData=JSON.parse(localStorage.getItem("addressArray"));
+		
 		var displayExistingStuff = "<br>";
 		
 		for (i = 0; i < programAddressData.length; i++)
@@ -89,20 +89,23 @@ $(document).ready(function(){
 			confirmationMainDiv.show();
 	}
 
-	console.log(programAddressData);
-	console.log(localStorage.getItem("addressArray") );
-
+	//log the array contents toconsole for debugging
+	//console.log(programAddressData);	
 	
-	$("#clickMe").click(function(){
-		
-		
-		
+	//run when "submit" button is clicked
+	$("#clickMe").click(function(){		
+	
+		//remove class for error coloring and any error messages		
 		$(".error").removeClass()
 		
-		$("email_Error").empty();
-		$("confirmEmail_Error").empty();
-
+		$("#email_Error").empty();
+		$("#confirmEmail_Error").empty();
+		$("#fn_Error").empty();
+		$("#ln_Error").empty();
+		$("#phone_Error").empty();
+		$("#email_Error").empty();
 				
+		//variable to indicate whether or not any errors have been found, updates will only happen if this stays at 1
 		var readyToDisplay = 1;
 		
 		if (!checkFilled(firstName))
@@ -149,31 +152,39 @@ $(document).ready(function(){
 		{
 			$("#emailLabel").addClass("error");
 			//document.getElementById("emailLabel").className="error";
-			$("#email_Error").append(" does not match");
+			$("#email_Error").append(" does not match")
 			//document.getElementById("email_Error").innerHTML += " does not match";
 			$("#confEmailLabel").addClass("error");
 			//document.getElementById("confEmailLabel").className="error";
-			$("#confirmEmail_Error").append(" does not match");
+			$("#confirmEmail_Error").append(" does not match")
 			//document.getElementById("confirmEmail_Error").innerHTML += " does not match";
 			readyToDisplay = 2;			
 		}
 		
 		if (readyToDisplay === 1)
-		{			
-			var displayStuff = firstName.val() + "&nbsp" + lastName.val() + "<br>" + email.val() + "<br>" + phone.val();
-			confirmationInfoDiv.html(displayStuff);
-			//confirmationInfoDiv.innerHTML = displayStuff;
-			formDiv.hide();
-			//formDiv.style.display = "none";
-			confirmationMainDiv.show();
-			//confirmationMainDiv.style.display = "block";		
+		{		
+						
+			//if no errors, show the content div if hidden, load form info into object, add object to array, then load array into content div with a for loop
 			
+			confirmationMainDiv.show();
 
-                        var address1 = new NewAddress(firstName.val(), lastName.val(), email.val(), phone.val());
-                        //next 3 lines change to store to database function
-                        programAddressData.push(address1);
-                        var localAddressData = JSON.stringify(programAddressData);
-                        localStorage.setItem("addressArray", localAddressData);
+			var address1 = new NewAddress(firstName.val(), lastName.val(), email.val(), phone.val());
+			
+			programAddressData.push(address1);			
+			
+			var displayNewStuff = "<br>";
+			
+			for (i = 0; i < programAddressData.length; i++)
+			{
+				displayNewStuff += programAddressData[i].firstName + "&nbsp" + programAddressData[i].lastName + "<br>" + programAddressData[i].email + "<br>" + programAddressData[i].phone;
+				displayNewStuff += "<br><hr><br>";				
+			}
+			
+			confirmationInfoDiv.html(displayNewStuff);
+			
+			//log array again for debugging
+			//console.log(programAddressData);
+			
 		}	 
 	}) 
  

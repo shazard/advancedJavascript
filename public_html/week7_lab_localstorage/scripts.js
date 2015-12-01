@@ -1,5 +1,14 @@
 
 
+/*check for local storage
+take data and put in object
+stringify data and save to local storage
+
+on page load check for existing local storage
+then fill array from local storage if it's there
+
+*/
+
 
 function checkFilled(formField)
 {	
@@ -74,7 +83,6 @@ $(document).ready(function(){
 	
 	if (localStorage.getItem("addressArray") != null)
 	{
-                //replace below line with get function from database
 		programAddressData=JSON.parse(localStorage.getItem("addressArray"));
 		var displayExistingStuff = "<br>";
 		
@@ -91,7 +99,14 @@ $(document).ready(function(){
 
 	console.log(programAddressData);
 	console.log(localStorage.getItem("addressArray") );
+	
+	
+	
+	
+	
 
+	
+	
 	
 	$("#clickMe").click(function(){
 		
@@ -149,11 +164,11 @@ $(document).ready(function(){
 		{
 			$("#emailLabel").addClass("error");
 			//document.getElementById("emailLabel").className="error";
-			$("#email_Error").append(" does not match");
+			$("#email_Error").append(" does not match")
 			//document.getElementById("email_Error").innerHTML += " does not match";
 			$("#confEmailLabel").addClass("error");
 			//document.getElementById("confEmailLabel").className="error";
-			$("#confirmEmail_Error").append(" does not match");
+			$("#confirmEmail_Error").append(" does not match")
 			//document.getElementById("confirmEmail_Error").innerHTML += " does not match";
 			readyToDisplay = 2;			
 		}
@@ -168,12 +183,21 @@ $(document).ready(function(){
 			confirmationMainDiv.show();
 			//confirmationMainDiv.style.display = "block";		
 			
-
-                        var address1 = new NewAddress(firstName.val(), lastName.val(), email.val(), phone.val());
-                        //next 3 lines change to store to database function
-                        programAddressData.push(address1);
-                        var localAddressData = JSON.stringify(programAddressData);
-                        localStorage.setItem("addressArray", localAddressData);
+			if (typeof(Storage) !== "undefined") 
+			{
+				var address1 = new NewAddress(firstName.val(), lastName.val(), email.val(), phone.val());
+				
+				programAddressData.push(address1);
+				var localAddressData = JSON.stringify(programAddressData);
+				localStorage.setItem("addressArray", localAddressData);
+				
+			} 
+			else 
+			{
+				// Sorry! No Web Storage support..
+			}
+			
+			
 		}	 
 	}) 
  
