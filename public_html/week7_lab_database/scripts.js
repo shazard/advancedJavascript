@@ -1,14 +1,5 @@
 
 
-/*check for local storage
-take data and put in object
-stringify data and save to local storage
-
-on page load check for existing local storage
-then fill array from local storage if it's there
-
-*/
-
 
 function checkFilled(formField)
 {	
