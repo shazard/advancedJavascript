@@ -83,6 +83,7 @@ $(document).ready(function(){
 	
 	if (localStorage.getItem("addressArray") != null)
 	{
+                //replace below line with get function from database
 		programAddressData=JSON.parse(localStorage.getItem("addressArray"));
 		var displayExistingStuff = "<br>";
 		
@@ -186,7 +187,7 @@ $(document).ready(function(){
 			if (typeof(Storage) !== "undefined") 
 			{
 				var address1 = new NewAddress(firstName.val(), lastName.val(), email.val(), phone.val());
-				
+				//next 3 lines change to store to database function
 				programAddressData.push(address1);
 				var localAddressData = JSON.stringify(programAddressData);
 				localStorage.setItem("addressArray", localAddressData);
