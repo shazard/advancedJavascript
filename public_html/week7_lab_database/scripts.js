@@ -1,5 +1,15 @@
 
+var confirmationMainDiv;
+var confirmationInfoDiv;
 
+var form1;
+var formDiv;
+
+var firstName;
+var lastName;
+var email;
+var confirmEmail;
+var phone;
 
 function checkFilled(formField)
 {	
@@ -25,18 +35,32 @@ function checkConfirm(formField1, formField2)
 	}	
 }
 
-var confirmationMainDiv;
-var confirmationInfoDiv;
+var col, row;
 
-var form1;
-var formDiv;
+function deleteRow()
+{	
+        col = $(this);
+        row = $(this).parent().parent();
+        row.remove();
+        $.getJSON( "addresses.php", {action: "deletePerson", id: col.attr("id").split("_")[1] } );
+}
 
-var firstName;
-var lastName;
-var email;
-var confirmEmail;
-var phone;
-
+function printPeople(json) 
+{
+        for (i=0; i<json.Result.length; i++) {
+                str = "<tr>";
+                str += "<td>" + json.Result[i].fName + "</td>";
+                str += "<td>" + json.Result[i].lName + "</td>";
+                str += "<td>" + json.Result[i].email + "</td>";
+                str += "<td>" + json.Result[i].phone + "</td>";
+                str += "<td><input type='button' class='deleteRow' value='delete' id='id_" + json.Result[i].id + "'></td>";
+                str += "</tr>";
+                $('#peopleTable').append(str);
+        }
+        //not sure what these do?
+        $( ".deleteRow" ).off( "click");
+        $( ".deleteRow" ).on( "click",  deleteRow);
+}
 
 $(document).ready(function(){
 	
@@ -68,40 +92,24 @@ $(document).ready(function(){
 		this.lastName = lastName;
 		this.email = email;
 		this.phone = phone;
-	}	
-	
-	var programAddressData = [];
-	
-	if (localStorage.getItem("addressArray") != null)
-	{
-                //replace below line with get function from database
-		programAddressData=JSON.parse(localStorage.getItem("addressArray"));
-		var displayExistingStuff = "<br>";
+	}	        
+        	
+	$.getJSON( "addresses.php", { action: "list"  } ).done(function( json ) {
+            printScores (json);
+          });
+          
+        confirmationMainDiv.show();
 		
-		for (i = 0; i < programAddressData.length; i++)
-		{
-			displayExistingStuff += programAddressData[i].firstName + "&nbsp" + programAddressData[i].lastName + "<br>" + programAddressData[i].email + "<br>" + programAddressData[i].phone;
-			displayExistingStuff += "<br><hr><br>";
-
-			
-		}
-			confirmationInfoDiv.html(displayExistingStuff);
-			confirmationMainDiv.show();
-	}
-
-	console.log(programAddressData);
-	console.log(localStorage.getItem("addressArray") );
-
-	
 	$("#clickMe").click(function(){
 		
+                $(".error").removeClass()
 		
-		
-		$(".error").removeClass()
-		
-		$("email_Error").empty();
-		$("confirmEmail_Error").empty();
-
+		$("#email_Error").empty();
+		$("#confirmEmail_Error").empty();
+		$("#fn_Error").empty();
+		$("#ln_Error").empty();
+		$("#phone_Error").empty();
+		$("#email_Error").empty();
 				
 		var readyToDisplay = 1;
 		
@@ -160,20 +168,19 @@ $(document).ready(function(){
 		
 		if (readyToDisplay === 1)
 		{			
-			var displayStuff = firstName.val() + "&nbsp" + lastName.val() + "<br>" + email.val() + "<br>" + phone.val();
+			var displayStuff = "Added:<br>" + firstName.val() + "&nbsp" + lastName.val() + "<br>" + email.val() + "<br>" + phone.val();
 			confirmationInfoDiv.html(displayStuff);
 			//confirmationInfoDiv.innerHTML = displayStuff;
-			formDiv.hide();
+			//formDiv.hide();
 			//formDiv.style.display = "none";
 			confirmationMainDiv.show();
 			//confirmationMainDiv.style.display = "block";		
 			
-
                         var address1 = new NewAddress(firstName.val(), lastName.val(), email.val(), phone.val());
-                        //next 3 lines change to store to database function
-                        programAddressData.push(address1);
-                        var localAddressData = JSON.stringify(programAddressData);
-                        localStorage.setItem("addressArray", localAddressData);
+                        console.log(address1);
+
+                        $.getJSON( "addresses.php", { firstName: firstName.val(), lastName: lastName.val(), email: email.val(), phone: phone.val(), action: "insert" } );
+
 		}	 
 	}) 
  
