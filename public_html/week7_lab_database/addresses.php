@@ -51,7 +51,7 @@
 	
 
 	// always list
-    $query = "SELECT id, fName, lName, email, phone FROM scores";
+    $query = "SELECT id, fName, lName, email, phone FROM people";
     $statement = $db->prepare ($query);
     $success = $statement->execute();
     $rows = $statement->fetchAll(PDO::FETCH_ASSOC);

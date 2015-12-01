@@ -95,6 +95,7 @@ $(document).ready(function(){
 	}	        
         	
 	$.getJSON( "addresses.php", { action: "list"  } ).done(function( json ) {
+            console.log(json);
             printScores (json);
           });
           
