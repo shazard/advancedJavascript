@@ -1,6 +1,8 @@
 <?php
     
     include ('database.php');
+    
+    $db = dbconnect();
 
     if (isset($_GET['fName'])) {
         $fName = $_GET['fName'];
@@ -54,9 +56,16 @@
     $query = "SELECT id, fName, lName, email, phone FROM people";
     $statement = $db->prepare ($query);
     $success = $statement->execute();
-    $rows = $statement->fetchAll(PDO::FETCH_ASSOC);
+    
+    
+    $results = array();
+    if ($stmt->execute() && $stmt->rowCount() > 0) 
+    {
+        $results = $stmt->fetchAll(PDO::FETCH_ASSOC);
+    }
 
+    var_dump($results);
    
-    echo json_encode(array('Result' => $rows));
+    echo json_encode(array('Result' => $results));
 
 ?>
