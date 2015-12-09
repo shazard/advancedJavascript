@@ -1,0 +1,158 @@
+@charset "utf-8";
+/* CSS Document */
+
+/*Main page style*/
+body {
+	background-color:rgb(5,42,68);
+	background-image:url(images/background.jpg);
+	font-family:Arial;
+	color:#e0e3e5;
+	font-size:18px;
+
+}
+
+/*main content wrapper*/
+#wrapper {
+	width:925px;
+	padding:10px;
+	margin:auto;
+	background-color:black;
+	border:1px solid #517e8f;
+	
+}
+
+#header {
+	float:left;
+	width:500px;
+}
+
+#logo {
+	
+        width:900px;
+}
+
+
+/* Social Media and nav and buttons */
+
+#socialmedia {
+	float:right;
+	width:100px;
+	height:120px;
+}
+
+#nav {
+	float:right;
+	width:250px;
+	height:20px;
+}
+
+.btn {
+	font-size:12px;
+	font-weight:bold;
+	line-height:20px;
+	color:white;
+	text-decoration:none;
+}
+
+.btn:hover {
+	font-size:13px;
+	color:blue;
+	text-decoration:none;
+}
+
+
+#spacer {
+
+	float:left;
+	width:920px;
+	background-color:white;
+	border-bottom:1px solid #646a6e;
+
+}
+
+/* Home Page Content Styles*/
+
+#left {
+	float:left;
+	width:600px;
+	padding:10px;
+	margin-bottom:10px;
+	
+}
+
+.title {
+	float:left;
+	width:100%;
+	height:30px;
+	color:white;
+}
+
+#right {
+	float:right;
+	width:240px;
+	padding:5px;
+	margin-top:25px;
+	margin-bottom:10px;
+	margin-right:20px;
+	
+}
+
+#sidebar {
+	float:left;
+	width:240px;
+	height:30px;
+	margin-bottom:10px;
+	background-color:#0d3b58;
+	background-repeat:no-repeat;
+	background-position:200px center;
+}
+
+/* Home page picture*/
+.homepic {
+float:right;
+}
+
+.feature-title {
+	float:left;
+	font-size:18px;
+	margin:5px 0px 0px 10px;
+}
+
+.side-thumb {
+	float:left;
+	border:1px solid white;
+	margin-bottom:10px;
+}
+
+/* Footer*/
+
+#footer {
+	clear:both;
+	width:940px;
+	height:40px;
+	font-size:10px;
+	text-align:center;
+	color:rgb(106,130,145);
+	border-top:2px solid #3c6777;
+}
+
+/*Inner box for page content*/
+
+#innerwrapper {
+	float:left;
+	width:850px;
+	padding:10px;
+	margin:25px;
+	background-color:#0E0E2B;
+	border:5px solid white
+	
+}
+
+/*tables*/
+table, th, td {
+    border: 2px solid #e0e3e5;
+    border-collapse: collapse;
+}
+th, td {
+    padding: 5px;
+}
