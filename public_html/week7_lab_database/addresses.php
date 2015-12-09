@@ -54,14 +54,14 @@
 
 	// always list
     $query = "SELECT id, fName, lName, email, phone FROM people";
-    $statement = $db->prepare ($query);
+    $statement = $db->prepare($query);
     $success = $statement->execute();
     
     
     $results = array();
-    if ($stmt->execute() && $stmt->rowCount() > 0) 
+    if ($statement->execute() && $statement->rowCount() > 0) 
     {
-        $results = $stmt->fetchAll(PDO::FETCH_ASSOC);
+        $results = $statement->fetchAll(PDO::FETCH_ASSOC);
     }
 
     var_dump($results);

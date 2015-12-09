@@ -64,6 +64,7 @@ function printPeople(json)
 
 $(document).ready(function(){
 	
+      
 	//form1 = document.forms.info;
 		
 	confirmationMainDiv = $("#confirmation");
@@ -83,9 +84,6 @@ $(document).ready(function(){
 	phone = $("#phone");	
 	//phone = document.getElementById("phone");
 	
-	
-	//localStorage.clear();
-	
 	function NewAddress(firstName, lastName, email, phone)
 	{
 		this.firstName = firstName;
@@ -93,10 +91,11 @@ $(document).ready(function(){
 		this.email = email;
 		this.phone = phone;
 	}	        
-        	
+        	 alert("I WORK!");
 	$.getJSON( "addresses.php", { action: "list"  } ).done(function( json ) {
             console.log(json);
             printPeople (json);
+             
           });
           
         confirmationMainDiv.show();
