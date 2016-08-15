@@ -1,15 +1,14 @@
 
 var reviewsDiv;
-var confirmationInfoDiv;
+var confirmation;
 
 var form1;
-var formDiv;
+var addReviewForm;
 
-var firstName;
-var lastName;
-var email;
-var confirmEmail;
-var phone;
+var gameName;
+var gameRating;
+var gameReview;
+
 
 function checkRatingRegex(formField)
 {
@@ -37,41 +36,22 @@ function checkFilled(formField)
 	}	
 }
 
-function checkConfirm(formField1, formField2)
-{	
-	if (formField1.val() === formField2.val())
-	{
-		return true;
-	}
-	else 
-	{
-		return false;
-	}	
-}
 
 var col, row;
 
-function deleteRow()
-{	
-        col = $(this);
-        row = $(this).parent().parent();
-        row.remove();
-        $.getJSON( "addresses.php", {action: "deletePerson", id: col.attr("id").split("_")[1] } );
-}
 
-function printPeople(json) 
+
+function printReviews(json) 
 {
         for (i=0; i<json.Result.length; i++) {
                 str = "<tr>";
-                str += "<td>" + json.Result[i].fName + "</td>";
-                str += "<td>" + json.Result[i].lName + "</td>";
-                str += "<td>" + json.Result[i].email + "</td>";
-                str += "<td>" + json.Result[i].phone + "</td>";
-                str += "<td><input type='button' class='deleteRow' value='delete' id='id_" + json.Result[i].id + "'></td>";
+                str += "<td>" + json.Result[i].GameName + "</td>";
+                str += "<td>" + json.Result[i].GameRating + "</td>";
+                str += "<td>" + json.Result[i].GameReview + "</td>";
                 str += "</tr>";
-                $('#peopleTable').append(str);
+                $('#reviewTable').append(str);
         }
-        //not sure what these do?
+        
         $( ".deleteRow" ).off( "click");
         $( ".deleteRow" ).on( "click",  deleteRow);
 }
@@ -79,143 +59,150 @@ function printPeople(json)
 $(document).ready(function(){
 	
       
-	//form1 = document.forms.info;
-		
-	confirmationMainDiv = $("#confirmation");
-	//confirmationMainDiv = document.getElementById("confirmation");
-	confirmationInfoDiv = $("#info");
-	//confirmationInfoDiv = document.getElementById("info");
-	formDiv = $("#form");	
-	//formDiv = document.getElementById("form");
-	firstName = $("#firstName");	
-	//firstName = document.getElementById("firstName");
-	lastName = $("#lastName");	
-	//lastName = document.getElementById("lastName");
-	email = $("#email");	
-	//email = document.getElementById("email");
-	confirmEmail = $("#confirmEmail");	
-	//confirmEmail = document.getElementById("confirmEmail");
-	phone = $("#phone");	
-	//phone = document.getElementById("phone");
+	confirmation = $("#confirmation");
+
+	addReviewForm = $("#addReviewForm");
+	gameName = $("#gameName");	
+
+	gameRating = $("#gameRating");	
+
+	gameReview = $("#gameReview");
+        
+        $("#reviews").show();
+        $("#addReviewForm").hide();
+        $("#aboutUs").hide();
+        $("#contactUs").hide(); 
+        $("#gobackbutton").hide();
+       
+       //$("#clickMe").click(function(){} instead?
+        $(document).on('click', '#readReviews', function() {
+            $("#reviews").show();
+            $("#addReviewForm").hide();
+            $("#aboutUs").hide();
+            $("#contactUs").hide();
+            $("#gobackbutton").hide();
+           
+        });
+        
+        $(document).on('click', '#readAbout', function() {
+            $("#reviews").hide();
+            $("#addReviewForm").hide();
+            $("#aboutUs").show();
+            $("#contactUs").hide(); 
+            $("#gobackbutton").hide();
+           
+        });
+        
+        $(document).on('click', '#readContact', function() {
+            $("#reviews").hide();
+            $("#addReviewForm").hide();
+            $("#aboutUs").hide();
+            $("#contactUs").show();
+            $("#gobackbutton").hide();
+            
+        });
+        
+        $(document).on('click', '#readAdd', function() {
+            $("#reviews").hide();
+            $("#addReviewForm").show();
+            $("#aboutUs").hide();
+            $("#contactUs").hide();
+            $("#gobackbutton").hide();
+            
+        });
 	
-	function NewAddress(firstName, lastName, email, phone)
+	function NewReview(gameName, gameRating, gameReview)
 	{
-		this.firstName = firstName;
-		this.lastName = lastName;
-		this.email = email;
-		this.phone = phone;
+		this.firstName = gameName;
+		this.lastName = gameRating;
+		this.email = gameReview;
 	}	        
         	 
-	$.getJSON( "addresses.php", function( json ) {
+	$.getJSON( "gameReviewsDB.php", function( json ) {
             //alert("I WORK!");
             //console.log(json);
-            printPeople (json);
+            printReviews (json);
              
           });
           
-        confirmationMainDiv.show();
+        // show revew listing 
+        // confirmationMainDiv.show();
+        
+        $("#reloadMe").click(function(){
+            confirmation.empty();
+            location.reload();
+            $("#gobackbutton").hide();
+        })
 		
 	$("#clickMe").click(function(){
 		
                 $(".error").removeClass()
 		
-		$("#email_Error").empty();
-		$("#confirmEmail_Error").empty();
-                $("#email_regexError").empty();
-                $("#phone_regexError").empty();
-		$("#fn_Error").empty();
-		$("#ln_Error").empty();
-		$("#phone_Error").empty();
-		$("#email_Error").empty();
+		$("#gameName_Error").empty();
+		$("#gameRating_Error").empty();
+                $("#gameRating_regexError").empty();
+                $("#gameReview_regexError").empty();
+                $("#gameReview_Error").empty();
 				
 		var readyToDisplay = 1;
 		
-		if (!checkFilled(firstName))
+		if (!checkFilled(gameName))
 		{
-			$("#fNameLabel").addClass("error");
-			//document.getElementById("fNameLabel").className="error";
-			$("#fn_Error").html("*");
-			//document.getElementById("fn_Error").innerHTML = "*";
+			$("#gameNameLabel").addClass("error");
+			$("#gameName_Error").html("*required");
+                        $("#gameName_Error").addClass("error");
 			readyToDisplay = 2;			
 		}
-		if (!checkFilled(lastName))
+		if (!checkFilled(gameRating))
 		{
-			$("#lNameLabel").addClass("error");
-			//document.getElementById("lNameLabel").className="error";
-			$("#ln_Error").addClass("error");
-			//document.getElementById("ln_Error").innerHTML = "*";
+			$("#gameRatingLabel").addClass("error");
+                        $("#gameRating_Error").html("*required");
+			$("#gameRating_Error").addClass("error");
 			readyToDisplay = 2;	
 		}
-		if (!checkFilled(email))
+		if (!checkFilled(gameReview))
 		{
-			$("#emailLabel").addClass("error");
-			//document.getElementById("emailLabel").className="error";
-			$("#email_Error").addClass("error");
-			//document.getElementById("email_Error").innerHTML = "*";
+			$("#gameReviewLabel").addClass("error");
+			$("#gameReview_Error").addClass("error");
+                        $("#gameReview_Error").html("*required");
 			readyToDisplay = 2;	
 		}
-                if (!checkEmailRegex(email))
+                if (!checkRatingRegex(gameRating))
                 {
-                        $("#emailLabel").addClass("error");
-                        $("#email_regexError").append(" not a valid email address");;
+                        $("#gameRatingLabel").addClass("error");
+                        $("#gameRating_regexError").addClass("error");
+                        $("#gameRating_regexError").append(" rating must be 1-10");;
 			readyToDisplay = 2;	
                     
                 } 
-                if (!checkPhoneRegex(phone))
+                if (!checkReviewRegex(gameReview))
                 {
-                        $("#phoneLabel").addClass("error");
-                        $("#phone_regexError").append(" not a valid phone number");;
+                        $("#gameReviewLabel").addClass("error");
+                        $("#gameReview_regexError").append("must be 10-850 characters");;
 			readyToDisplay = 2;
                 } 
-		if (!checkFilled(confirmEmail))
-		{
-			$("#confEmailLabel").addClass("error");
-			//document.getElementById("confEmailLabel").className="error";
-			$("#confirmEmail_Error").addClass("error");
-			//document.getElementById("confirmEmail_Error").innerHTML = "*";
-			readyToDisplay = 2;	
-		}
-		if (!checkFilled(phone))
-		{
-			$("#phoneLabel").addClass("error");
-			//document.getElementById("phoneLabel").className="error";
-			$("#phone_Error").addClass("error");
-			//document.getElementById("phone_Error").innerHTML = "*";
-			readyToDisplay = 2;	
-		}
-		if (! checkConfirm(email, confirmEmail))
-		{
-			$("#emailLabel").addClass("error");
-			//document.getElementById("emailLabel").className="error";
-			$("#email_Error").append(" does not match");
-			//document.getElementById("email_Error").innerHTML += " does not match";
-			$("#confEmailLabel").addClass("error");
-			//document.getElementById("confEmailLabel").className="error";
-			$("#confirmEmail_Error").append(" does not match");
-			//document.getElementById("confirmEmail_Error").innerHTML += " does not match";
-			readyToDisplay = 2;			
-		}
+		
 		
 		if (readyToDisplay === 1)
 		{			
-			var displayStuff = "Added:<br>" + firstName.val() + "&nbsp" + lastName.val() + "<br>" + email.val() + "<br>" + phone.val();
-			confirmationInfoDiv.html(displayStuff);
-			//confirmationInfoDiv.innerHTML = displayStuff;
-			//formDiv.hide();
-			//formDiv.style.display = "none";
-			confirmationMainDiv.show();
-			//confirmationMainDiv.style.display = "block";		
+			var displayStuff = '<br><h2 class="title">Added:</h2><br>' + gameName.val() + '<br>';
+			confirmation.append(displayStuff);
+                        
+                        //hide the form
+                        addReviewForm.hide();
+                        $("#gobackbutton").show();
+		
 			
-                        var address1 = new NewAddress(firstName.val(), lastName.val(), email.val(), phone.val());
-                        console.log(address1);
+                        var review1 = new NewReview(gameName.val(), gameRating.val(), gameReview.val());
+                        console.log(review1);
 
-                        //$.getJSON( "addresses.php", { firstName: firstName.val(), lastName: lastName.val(), email: email.val(), phone: phone.val(), action: "insert" } );
+                        
 
-                        $.getJSON( "addresses.php", { fName: firstName.val(), lName: lastName.val(), email: email.val(), phone: phone.val(), action: "insert" } , function( json ) {
+                        $.getJSON( "gameReviewsDB.php", { gameName: gameName.val(), gameRating: gameRating.val(), gameReview: gameReview.val(), action: "insert" } , function( json ) {
                             //alert("I WORK!");
                             //console.log(json);
-                            $('#peopleTable').html("<tbody><tr><th>First Name</th><th>Last Name</th><th>Email</th><th>Phone</th></tr></tbody>");
-                            printPeople (json);
+                            $('#reviewTable').html("<tbody><tr><th>Game Name</th><th>Rating</th><th>Review</th></tr></tbody>");
+                            printReviews (json);
              
                         });
              

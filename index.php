@@ -56,30 +56,51 @@
 
                     <p id="gameRatingLabel">
                         Game Rating (1-10) <br />
-                    <input type="text" id="gameRating"/> <span id="gameRating_Error"> </span> <span id="gameReview_regexError"> </span>
+                    <input type="text" id="gameRating"/> <span id="gameRating_Error"> </span> <span id="gameRating_regexError"> </span>
                     </p>
 
                      <p id="gameReviewLabel">
                         Review <br />
-                    <input type="text" id="gameReview"/> <span id="gameReview_Error"> </span> 
+                    <input type="text" id="gameReview"/> <span id="gameReview_Error"> </span> <span id="gameReview_regexError"> </span>
                     </p>
 
                     <!-- "clickME" calls a .click function to check form contents, update styling for error messages, and update stored info-->
                     <input type="button" value="submit" id="clickMe"/>
                     </form>
+                
             </div>
             
+            <span id="confirmation"></span>
+            
+            <br><br>
+            
+            <div id='gobackbutton'><input type="button" value="Go Back" id="reloadMe"/><br></div>
+                    
             <div id="aboutUs">
                 <h2 class="title">About Us</h2>
                 <p>
-                    All about us!
+                    Welcome to Get Your Game On!
+                </p><p>    
+                    We're your one stop shop for saving your personal feelings about your video game experiences.
+                </p><p>
+                     Never forget how much you loved or hated a game ever again!
+                </p><p>
+                    Future updates will maybe someday include things like user logins, game screenshots, opening your reviews for other users to view and comment, and perhaps pizza delivery!
+                </p><p>
+                    Keep coming back for more, you never know what you'll find!
                 </p>
             </div>
 
             <div id="contactUs">
                 <h2 class="title">Contact Us</h2>
                 <p>
-                    Contact Us!
+                    How to contact us:
+                </p><p>
+                    Step 1: Walk to your window, open it, and stick your head out as far as you can (we're not responsible if you fall out or hurt yourself).
+                </p><p>   
+                    Step2: Shout your question, comment or concern as loud as you can.
+                 </p><p>    
+                    We basically guarantee we'll get back to you faster than Steam Customer Service, and with more helpfulness than Microsoft.
                 </p>
             </div>
             
@@ -90,10 +111,10 @@
 	<aside id="right">
 		<header id="sidebar"><h3 class="feature-title">Check It Out!</h3></header>
 		<p>
-		<a href="http://www.w3schools.com/sql/default.asp">Read Reviews</a></br>
-		<a href="http://sqlzoo.net/wiki/Main_Page">About</a></br>
-		<a href="http://www.tutorialspoint.com/sql/">Contact Us</a></br>
-                <a href="http://www.tutorialspoint.com/sql/">Add A Review</a></br>
+		<a href="javascript:void[0];" id="readReviews">Read Reviews</a></br>
+		<a href="javascript:void[0];" id="readAbout">About</a></br>
+		<a href="javascript:void[0];" id="readContact">Contact Us</a></br>
+                <a href="javascript:void[0];" id="readAdd">Add A Review</a></br>
 		</p>
 	</aside>
 

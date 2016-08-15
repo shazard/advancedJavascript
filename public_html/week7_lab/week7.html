@@ -1,0 +1,54 @@
+<!doctype html>
+<html>
+<head>
+<meta charset="utf-8">
+<title>Week 2 Lab</title>
+<link type="text/css" rel="stylesheet" href="style.css" />
+<script src="jquery-2.1.3.js"></script>
+<script type="text/javascript" src="scripts.js"></script>
+
+</head>
+
+<body>
+
+<div id="form">
+	
+    <form name="info">
+    <p id="fNameLabel">
+    First Name <br />
+    <input type="text" id="firstName"/> <span id="fn_Error"> </span>
+    </p>
+    
+    <p id="lNameLabel">
+   	Last Name <br />
+    <input type="text" id="lastName"/> <span id="ln_Error"> </span>
+    </p>
+    
+     <p id="emailLabel">
+   	Email <br />
+    <input type="text" id="email"/> <span id="email_Error"> </span>
+    </p>
+	
+	<p id="confEmailLabel">
+   	Confirm Email <br />
+    <input type="text" id="confirmEmail"/> <span id="confirmEmail_Error"> </span>
+    </p>
+    
+     <p id="phoneLabel">
+   	Phone Number <br />
+    <input type="text" id="phone"/> <span id="phone_Error"> </span>
+    </p>
+    <!-- "clickME" calls a .click function to check form contents, update styling for error messages, and update stored info-->
+    <input type="button" value="submit" id="clickMe"/>
+    </form>
+
+</div>
+
+<div id="confirmation">
+	<h1>Confirmation</h1>
+    <p id="info">
+    </p>
+</div>
+
+</body>
+</html>
